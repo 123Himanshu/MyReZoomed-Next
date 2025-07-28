@@ -15,6 +15,23 @@ interface FileUploaderProps {
   maxSize?: number
 }
 
+const createAcceptObject = (types: string[]) => {
+  const accept: Record<string, string[]> = {}
+  types.forEach(type => {
+    switch (type) {
+      case '.pdf':
+        accept['application/pdf'] = ['.pdf']
+        break
+      case '.doc':
+      case '.docx':
+        accept['application/msword'] = ['.doc']
+        accept['application/vnd.openxmlformats-officedocument.wordprocessingml.document'] = ['.docx']
+        break
+    }
+  })
+  return accept
+}
+
 export function FileUploader({
   acceptedTypes,
   onFileUpload,
@@ -51,13 +68,7 @@ export function FileUploader({
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
-    accept: acceptedTypes.reduce(
-      (acc, type) => {
-        acc[type] = []
-        return acc
-      },
-      {} as Record<string, string[]>,
-    ),
+    accept: createAcceptObject(acceptedTypes),
     maxSize,
     multiple: false,
   })
