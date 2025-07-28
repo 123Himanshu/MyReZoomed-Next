@@ -47,6 +47,11 @@ export function Header() {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
+            <Link href="/ats-checker">
+              <Button variant="ghost" className="text-foreground/70 hover:text-foreground">
+                ATS Checker
+              </Button>
+            </Link>
             {["Features", "How It Works", "Pricing", "About"].map((item, index) => (
               <motion.div
                 key={item}
