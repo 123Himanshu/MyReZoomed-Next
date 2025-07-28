@@ -61,7 +61,7 @@
     "react-hook-form": "7.45.4",
     "react-resizable-panels": "3.0.3",
     "recharts": "2.9.2",
-    "sonner": "1.0.1",
+    "sonner": "2.0.6",
     "tailwind-merge": "2.5.5",
     "tailwindcss-animate": "1.0.7",
     "use-sync-external-store": "1.2.0",
