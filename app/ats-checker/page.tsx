@@ -38,10 +38,11 @@ export default function ATSCheckerPage() {
         title: "Resume Uploaded",
         description: "Your resume has been successfully uploaded and parsed.",
       })
-    } catch (error) {
+    } catch (error: any) {
+      const errorMessage = error?.message || "Failed to upload and parse resume. Please try again."
       toast({
         title: "Upload Failed",
-        description: "Failed to upload and parse resume. Please try again.",
+        description: errorMessage,
         variant: "destructive",
       })
     }
@@ -79,10 +80,11 @@ export default function ATSCheckerPage() {
         title: "Analysis Complete",
         description: "Your resume has been analyzed against the job description"
       })
-    } catch (error) {
+    } catch (error: any) {
+      const errorMessage = error?.message || "Failed to analyze resume"
       toast({
         title: "Analysis Failed",
-        description: error.message || "Failed to analyze resume",
+        description: errorMessage,
         variant: "destructive"
       })
     } finally {
