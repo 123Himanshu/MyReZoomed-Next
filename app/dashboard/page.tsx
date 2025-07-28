@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
 import { FileText, Plus, Download, Eye, Edit, Trash2, Target, Clock, Star, BarChart3, Zap } from "lucide-react"
-import { useAuth } from "@clerk/nextjs"
+import { useAuth, useUser } from "@clerk/nextjs"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
 
@@ -23,7 +23,8 @@ interface ResumeItem {
 }
 
 export default function DashboardPage() {
-  const { isSignedIn, user } = useAuth()
+  const { isSignedIn } = useAuth()
+  const { user } = useUser()
   const router = useRouter()
   const [resumes, setResumes] = useState<ResumeItem[]>([])
   const [isLoading, setIsLoading] = useState(true)
