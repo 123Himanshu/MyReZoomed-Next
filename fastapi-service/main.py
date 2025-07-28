@@ -44,6 +44,29 @@ import logging
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
+@app.post("/ats-score")
+async def analyze_ats_score(request: dict):
+    try:
+        resume_text = request.get("resumeData", "")
+        job_description = request.get("jobDescription", "")
+        
+        if not resume_text or not job_description:
+            raise HTTPException(status_code=400, detail="Missing resume data or job description")
+            
+        from ats_score import calculate_ats_score
+        
+        # Calculate ATS score and get analysis
+        analysis = calculate_ats_score(resume_text, job_description)
+        
+        return JSONResponse({
+            "success": True,
+            "analysis": analysis
+        })
+        
+    except Exception as e:
+        logger.error(f"Error in ATS scoring: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
 @app.post("/upload")
 async def upload_file(
     file: UploadFile = File(...),
